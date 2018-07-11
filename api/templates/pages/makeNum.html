@@ -1,0 +1,22 @@
+{% extends  "pages/base.html"%}
+
+{%block head%}
+{%load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+{% endblock %}
+
+{%block content%}
+
+    <form action="/app/make" method="post">
+        {%csrf_token%}
+      <h1>Sinh mã ngẫu nhiên</h1><br/>
+
+      <span class="input"></span>
+      <input type="text" name="a" placeholder="a" value="21" autofocus autocomplete="off" required pattern="[0-9]+"/>
+      <span class="input"></span>
+      <input type="text" name="m" placeholder="m" required pattern="[0-9]+" />
+      <button type="submit"  title="Submit form" class="icon-arrow-right"><span>Sinh mã</span></button>
+    </form>
+
+{% endblock %}

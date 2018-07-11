@@ -1,0 +1,13 @@
+{% extends  "pages/base.html"%}
+{%block content%}
+
+    <a href="app/make">Tiếp tục sinh mã</a>
+    <br>
+    Danh sách số đã sinh
+    <br>
+    {% for i in data  %}
+        {{i}}
+    <br>
+    {% endfor %}
+
+{% endblock %}

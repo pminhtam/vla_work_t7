@@ -1,0 +1,50 @@
+{% extends  "pages/base.html"%}
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+	    <!--<form action="/insert" method="post">-->
+	        <!--{%csrf_token%}-->
+	        <!--<span>ID</span>-->
+	       	<!--<input type="text" name="id"/>-->
+	        <!--<br>-->
+            <!--<span>Tên sản phẩm</span>-->
+	        <!--<input type="text" name="ten" />-->
+	        <!--<br>-->
+            <!--<span>Giá sản phẩm</span>-->
+	        <!--<input type="text" name="gia" />-->
+	        <!--<br>-->
+	        <!--<input type="submit" value="Insert"/>-->
+	    <!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+{%block head%}
+ {%load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+{% endblock %}
+
+{%block content%}
+
+    <form action="/app/insert" method="post">
+        {%csrf_token%}
+      <h1>Thêm sản phẩm</h1><br/>
+
+      <span class="input"></span>
+      <input type="text" name="id" placeholder="Id" autofocus autocomplete="off" required/>
+      <span class="input"></span>
+      <input type="text" name="ten" placeholder="Tên sản phẩm" required />
+
+        <span class="input"></span>
+      <input type="text" name="gia" placeholder="Giá sản phẩm" required pattern="[0-9]+"/>
+      <button type="submit"  title="Submit form" class="icon-arrow-right"><span>Thêm</span></button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends  "pages/base.html"%}
+{%block head%}
+
+    	{%load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+{% endblock %}
+{%block content%}
+<center>
+    <form method="POST">
+        {% csrf_token %}
+        {% for key,value in form.errors.items %}
+            {{value}}
+        {% endfor %}
+        <span class="input">
+        <p><label>Tài khoản: </label>{{form.username}}</p>
+            <span class="input">
+        <p><label>Mật khẩu: </label>{{form.password}}</p>
+        <input type="hidden" name="next" value="/">
+        <input type="submit" value="Đăng nhập">
+
+    </form>
+</center>
+{% endblock %}

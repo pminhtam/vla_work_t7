@@ -1,0 +1,58 @@
+{% extends  "pages/base.html"%}
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Tìm bằng key</title>-->
+    <!--<style type="text/css">-->
+    	<!--#login{-->
+    		<!--position: absolute;-->
+    		<!--width:600px;-->
+    		<!--margin: 0 auto;-->
+    		<!--align-content: center;-->
+    		<!--padding: 100px;		-->
+    	<!--}-->
+ <!---->
+
+    <!--</style>-->
+<!--</head>-->
+<!--<body >-->
+	<!--<div id="login">-->
+	    <!--<form action="/find" method="post">-->
+	        <!--{%csrf_token%}-->
+	        <!--label-->
+			<!--<br>-->
+	       	<!--<input type="text" name="label" value="id"/>-->
+	       	<!--<br>-->
+	       	<!--key-->
+			<!--<br>-->
+	        <!--<input type="text" name="key" />-->
+	        <!--<br>-->
+	        <!--<input type="submit" value="Find"/>-->
+	    <!--</form>-->
+	<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+{%block head%}
+
+    	{%load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+{% endblock %}
+
+{%block content%}
+
+<form action="/app/find" method="post">
+    {%csrf_token%}
+  <h1>Tìm kiếm sản phẩm</h1><br/>
+
+  <span class="input"></span>
+  <input type="text" name="label" value="id" placeholder="Label" autofocus autocomplete="off" required/>
+  <span class="input"></span>
+  <input type="text" name="key" placeholder="Key" required />
+  <button type="submit"  title="Submit form" class="icon-arrow-right"><span>Tìm kiếm</span></button>
+</form>
+
+{% endblock %}

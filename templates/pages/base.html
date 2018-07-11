@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /*==Reset CSS==*/
+        * {
+          margin: 0;
+          padding: 0;
+        }
+        /*==Style cơ bản cho website==*/
+        body {
+          font-family: sans-serif;
+          color: #333;
+            width: 100%;
+        }
+        #menu ul {
+          background: #1F568B;
+          list-style-type: none;
+          text-align: center;
+        }
+        #menu li {
+          color: #f1f1f1;
+          display: inline-block;
+          width: 120px;
+          height: 40px;
+          line-height: 40px;
+          margin-left: -5px;
+        }
+        #menu a {
+          text-decoration: none;
+          color: #fff;
+          display: block;
+        }
+        #menu a:hover {
+          background: #F1F1F1;
+          color: #333;
+        }
+    </style>
+        {%block head%}{% endblock %}
+</head>
+<body>
+<div id="menu">
+    <ul>
+        <li><a href="/login">Đăng nhập</a></li>
+        <li><a href="/register">Đăng Ký</a></li>
+        <li><a href="/logout">Đăng xuất</a></li>
+        <li><a href="/app/find">Tìm kiếm</a></li>
+        <li><a href="/app/insert">Thêm dữ liệu</a></li>
+        <li><a href="/app/make">Tạo số</a></li>
+    </ul>
+</div>
+    {%block content%}{% endblock %}
+
+</body>
+</html>

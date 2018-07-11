@@ -1,0 +1,19 @@
+{% extends  "pages/base.html"%}
+{%block content%}
+
+
+<!--{% if user.username %}-->
+    <p>Xin chao {{user.username}}</p>
+    <p>Xin chao {{user.email}}</p>
+    <p>Xin chao {{user.password}}</p>
+    <p>Thuộc tính {{user.ten}}</p>
+    <p>Thuộc tính {{user.diachi}}</p>
+    <p>session{{sessionid}}</p>
+
+    <!--<p><a href="{% url 'logout'%}">Đăng xuất</a></p>-->
+<!--{% else %}-->
+    <!--<p><a href="{% url 'login'%}">Đăng nhập</a></p>-->
+<!--{% endif %}-->
+
+
+{% endblock %}
