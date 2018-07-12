@@ -1,13 +1,22 @@
 {% extends  "pages/base.html"%}
+
+{%block head%}
+    {%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{%block user%}
+{% endblock %}
+
 {%block content%}
-
-    <a href="app/make">Tiếp tục sinh mã</a>
-    <br>
-    Danh sách số đã sinh
-    <br>
-    {% for i in data  %}
-        {{i}}
-    <br>
-    {% endfor %}
-
+    <div>
+        <a href="/app/make">Tiếp tục sinh mã</a>
+        <br>
+        Danh sách số đã sinh
+        <br>
+        {% for i in data  %}
+            {{i}}
+        <br>
+        {% endfor %}
+    </div>
 {% endblock %}

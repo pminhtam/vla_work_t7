@@ -10,13 +10,18 @@
           padding: 0;
         }
         /*==Style cơ bản cho website==*/
-        body {
-          font-family: sans-serif;
-          color: #333;
-            width: 100%;
+        /*body {*/
+          /*font-family: sans-serif;*/
+          /*color: #333;*/
+            /*width: 100%;*/
+        /*}*/
+        body{
+          background: -webkit-linear-gradient(left, #c2f0ee, #edfaff);
+          background: linear-gradient(to right, #c2f0ee, #edfaff);
+          font-family: 'Roboto', sans-serif;
         }
         #menu ul {
-          background: #1F568B;
+          background: #25b7c4;
           list-style-type: none;
           text-align: center;
         }
@@ -41,16 +46,26 @@
         {%block head%}{% endblock %}
 </head>
 <body>
-<div id="menu">
-    <ul>
-        <li><a href="/login">Đăng nhập</a></li>
-        <li><a href="/register">Đăng Ký</a></li>
-        <li><a href="/logout">Đăng xuất</a></li>
-        <li><a href="/app/find">Tìm kiếm</a></li>
-        <li><a href="/app/insert">Thêm dữ liệu</a></li>
-        <li><a href="/app/make">Tạo số</a></li>
-    </ul>
-</div>
+    <div id="menu">
+        <ul>
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="/app/find">Tìm kiếm</a></li>
+            <li><a href="/app/findma">Tìm theo mã</a></li>
+            <li><a href="/app/insert">Thêm dữ liệu</a></li>
+            <li><a href="/app/make">Tạo số</a></li>
+
+            {%block user%}
+            <li><a href="/login">Đăng nhập</a></li>
+            <li><a href="/register">Đăng Ký</a></li>
+            {% endblock %}
+
+            {%block logout%}
+            <li><a href="/edit">Sửa thông tin</a></li>
+            <li><a href="/logout">Đăng xuất</a></li>
+            {% endblock %}
+
+        </ul>
+    </div>
     {%block content%}{% endblock %}
 
 </body>

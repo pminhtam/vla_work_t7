@@ -1,0 +1,33 @@
+{% extends  "pages/base.html"%}
+
+
+{%block head%}
+    {%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{%block user %}
+{% endblock %}
+
+
+{%block content%}
+    <form action="/edit" method="POST">
+        {% csrf_token %}
+
+        <label>Tên: </label>
+        <input type="text" name="ten" value="{{ user.ten }}" />
+        <label>Địa chỉ: </label>
+        <input type="text" name="diachi" value="{{user.diachi}}"/>
+        <label>Số điện thoại: </label>
+        <input type="text" name="SDT" value="{{user.SDT}}"/>
+        <label>Giới tính: </label>
+        <input type="text" name="gioitinh" value="{{user.gioitinh}}"/>
+        <label>chức vụ: </label>
+        <input type="text" name="chucvu" value="{{user.chucvu}}"/>
+
+        <input type="hidden" name="next" value="/">
+        <input type="hidden" name="username" value="{{user.username}}">
+        <!--{{form.as_p}}-->
+        <input type="submit" value="Chỉnh sửa">
+    </form>
+{% endblock %}

@@ -4,154 +4,36 @@ from . import utils
 import os.path
 # Create your views here.
 
-
-
-
-"""
-from pymongo import MongoClient
-from bson import json_util
-import json
-from datetime import datetime
-import redis
-
-
-def findByKeyAPI(request):
-    key = ""
-    if request.method == "GET":
-        key = request.GET.get('key')
-    if request.method == "POST":
-        key = request.POST.get('key')
-    # print(key)
-    client = MongoClient()
-    db = client.thunghiem
-    cursor = db.danhsach.find({"id": key})
-    a = []
-    for i in cursor:
-        a.append(json.dumps(i, default=json_util.default))
-    data = json.dumps(a)
-    return HttpResponse(data, content_type='application/json')
-def findByKeyWeb(request):
-    key=""
-    label="id"
-    time_find =0
-    # if request.method == "GET":
-    #     key = request.GET.get('key')
-    if request.method == "POST":
-        label = request.POST.get('label')
-        key = request.POST.get('key')
-    # print(label)
-    # print(key)
-    if key!="":
-        # start = datetime.now().timestamp()
-        # client = MongoClient()
-        # db = client.sp
-        # cursor = db.ds.find({label : key}).limit(20)
-        # end = datetime.now().timestamp()
-        # time_find = end - start
-        # data = []
-        # # print(time_find)
-        # for i in cursor:
-        #     print(i)
-        #     data.append(i)
-        # return render(request,"pages/index.html",{"data" : data,'time':time_find})
-
-###############################################Redis
-        ##############################
-        ######################
-        start = datetime.now().timestamp()
-        client = MongoClient()
-        db = client.sp
-        #r = redis.Redis(host="127.0.0.1", port=6379, password='')
-        data = None
-        status = ""
-        if(label=="id"):
-            data = None
-            #data = r.get(key)
-        if data != None:  # tim thay trong redis
-            data = data.decode('utf-8')
-            data = data.replace("'", "\"")
-            data = json.loads(data)
-            status = "Tìm thấy trong cache redis"
-        elif data == None:  # khong tim thay
-            data = []
-            status = "Không có trong cache"
-            print("khong tim thay trong redis")
-            # count = db.ds.find({label: key}).count()
-            # cur = []
-            cur = db.ds.find({label: key}).limit(20)
-            count = 0
-            # count = cur.count()
-            for i in cur:
-                # print(i)
-                i['_id'] = ''
-                data.append(i)
-            # r.set(key, json.dumps(data))
-        end = datetime.now().timestamp()
-        time_find = end - start
-        return render(request, "pages/index.html", {"data": data, 'time': time_find,'status':status,'count':count})
-    return render(request,"pages/find.html")
-
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-def phantrang(request):
-    start = datetime.now().timestamp()
-    client = MongoClient()
-    db = client.sp
-    cursor = db.ds.find({"ten" : "Máy tính"})
-    count = cursor.count()
-    end = datetime.now().timestamp()
-    time_find = end - start
-    data_list = []
-    # print(time_find)
-    for i in cursor:
-        # print(i)
-        data_list.append(i)
-    paginator = Paginator(data_list, 5)
-    pageNumber = request.GET.get('page')
-    try:
-        data = paginator.page(pageNumber)
-    except PageNotAnInteger:
-        data = paginator.page(1)
-    except EmptyPage:
-        data = paginator.page(paginator.num_pages)
-    return render(request,"pages/result.html",{"data" : data,'time':time_find,'count':count})
-"""
-
-
 def makeNum(request):
+    if request.user.is_staff==False:
+        return render(request,'pages/error.html',{'data':'Bạn phải đăng nhập Hoặc bạn không có quyền sinh số'})
     if request.method == "POST":
-        m = int(request.POST.get('m'))
+        id_sp = int(request.POST.get('id'))
+        m = int(request.POST.get('m'))              # số lượng sinh
         a = int(request.POST.get('a'))
-        createdNumber = 0
-        if os.path.isfile("daSinh.txt"):        # kiểm tra có tồn tại file ko
-            f = open("daSinh.txt",'r')
-            readFileResult = f.readline()                   # kiểm tra có đọc đc gì ko
-            if readFileResult:
-                createdNumber = int(readFileResult)                  # chuyển sang số
-            f.close()
-        # bias = 0
-        li = utils.lcg(a, m, createdNumber)
-        f = open("daSinh.txt",'w')              # lưu lại số lượng đã sinh
-        f.writelines(str(createdNumber+m))
-        f.close()
-        utils.writeData(li, "data.csv")
+        num_sum =utils.getCreatedNum()
+        li = utils.lcg(a, m, num_sum)
+        result = utils.insertDataDinhDanh(id_sp,li,m,num_sum)
+
+        if result == False:
+            return render(request, 'pages/error.html', {'data': 'Thêm không thành công'})
         return render(request,'pages/makeNumResult.html',{"data":li})
-    return render(request,'pages/makeNum.html')
+    data_ds = utils.getDataDanhSach()
+    return render(request,'pages/makeNum.html',{'data':data_ds})
 
 def insertData(request):
     if request.user.is_staff==False:
-        return render(request,'pages/error.html',{'data':'Bạn phải đăng nhập để thêm dữ liệu'})
+        return render(request,'pages/error.html',{'data':'Bạn phải đăng nhập Hoặc bạn không có quyền thêm dữ liệu'})
     if request.method == "POST":
-        id = int(request.POST.get('id'))
+        # id = int(request.POST.get('id'))
         ten = request.POST.get('ten')
         gia = request.POST.get('gia')
-        result = utils.insert(id, ten, gia)
+        result = utils.insert(ten, gia)
         if result==False:
             return render(request, 'pages/error.html', {'data': 'Thêm dữ liệu không thành công'})
-            # return HttpResponse({'Thêm dữ liệu không thành công'})
-        return render(request, 'pages/insertDataResult.html',{'id':id,'ten':ten,'gia':gia})
-    return render(request,'pages/insertData.html')
+        return render(request, 'pages/insertDataResult.html',{'ten':ten,'gia':gia})
+    return render(request,'pages/insertData.html')  #màn hình chèn dữ liệu
+
 def findData(request):
     key = ""
     label = "id"
@@ -160,48 +42,120 @@ def findData(request):
         key = request.POST.get('key')
     if key != "":
         data = utils.find(label, key)
+        if data == False or len(data)<1:
+            return render(request, 'pages/error.html', {'data': 'Không thấy dữ liệu'})
         return render(request, "pages/findResult.html", {"data": data})
     return render(request, "pages/find.html")
 
+def findDataMa(request):
+    if request.method == "POST":
+        ma_dd = request.POST.get('ma_dd')
+        id = utils.findMa(ma_dd)                # tìm id_sp theo mã định danh sản phẩm
+        if id == False:                         # không tìm thấy
+            return render(request, 'pages/error.html', {'data': 'Không thấy sản phẩm'})
+        # print("DATA MA "+ str(id))
+        data = utils.find("id",str(id))         # tìm sản phẩm theo id vừa nhận được
+        if data == False or len(data)<1:
+            return render(request, 'pages/error.html', {'data': 'Không thấy dữ liệu'})
+        return render(request, "pages/findResult.html", {"data": data})
+    return render(request, "pages/findMa.html")
+
+#######################################################################
 """
 API
 """
-#######################
+#######################################################################
 from django.views.decorators.csrf import csrf_exempt
 import json
+
+@csrf_exempt
+def api_login(request):             # đăng nhập nếu thành công trả lại token
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if utils.checkUser(username,password):
+            token = utils.createToken(username,password).decode('utf-8')
+            data = json.dumps({'code': 1, 'status': 'Đăng nhập thành công','token':token})
+            return HttpResponse(data,content_type="application/json")
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
+@csrf_exempt
+def api_register(request):             # đăng nhập nếu thành công trả lại token
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if utils.registerAPI(username,email,password1,password2).save():
+            if utils.checkUser(username, password1):            # đăng ký thành công thì đăng nhập luôn
+                token = utils.createToken(username, password1).decode('utf-8')
+                data = json.dumps({'code': 1, 'status': 'Đăng ký thành công','token':token})    # trả lại token
+                return HttpResponse(data,content_type="application/json")
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
+
+@csrf_exempt
+def api_verifyToken(request):
+    if request.method == "POST":
+        token = request.POST.get('token')
+        if utils.verifyToken(token):
+            data = json.dumps({'code': 1, 'status': 'Đăng nhập thành công'})
+            return HttpResponse(data,content_type="application/json")
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
+@csrf_exempt
+def api_edit(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        ten = request.POST.get('ten')
+        diachi = request.POST.get('diachi')
+        SDT = request.POST.get('SDT')
+        gioitinh = request.POST.get('gioitinh')
+        chucvu = request.POST.get('chucvu')
+        if utils.EditAPI(username,ten,diachi,SDT,gioitinh,chucvu).save():
+            data = json.dumps({'code': 1, 'status': 'Sửa thành công'})    # trả lại token
+            return HttpResponse(data,content_type="application/json")
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
 @csrf_exempt
 def api_makeNum(request):
     if request.method == "POST":
+        token = request.POST.get('token')
+        if utils.isAdminFromToken(token) == False:
+            data = json.dumps({'code': 0, 'status': 'Tên đăng nhập hoặc mật khẩu sai hoặc không có quyền'})
+            return HttpResponse(data,content_type="application/json")
+        id_sp = int(request.POST.get('id'))
         m = int(request.POST.get('m'))
         a = int(request.POST.get('a'))
-        createdNumber = 0
-        if os.path.isfile("daSinh.txt"):        # kiểm tra có tồn tại file ko
-            f = open("daSinh.txt",'r')
-            readFileResult = f.readline()                   # kiểm tra có đọc đc gì ko
-            if readFileResult:
-                createdNumber = int(readFileResult)                  # chuyển sang số
-            f.close()
-        # bias = 0
-        listNum = utils.lcg(a, m, createdNumber)
-        f = open("daSinh.txt",'w')              # lưu lại số lượng đã sinh
-        f.writelines(str(createdNumber+m))
-        f.close()
-        utils.writeData(listNum, "data.csv")
-        data = json.dumps({"listNum":listNum})
+        num_sum =utils.getCreatedNum()          # lấy tổng số đã sinh
+        li = utils.lcg(a, m, num_sum)
+        result = utils.insertDataDinhDanh(id_sp,li,m,num_sum)
+        if result == False:
+            data = json.dumps({'code': 0, 'status': 'Tạo số không thành công'})
+            return HttpResponse(data,content_type="application/json")
+        data = json.dumps({"listNum":li})
         return HttpResponse(data,content_type="application/json")
-    return HttpResponse({'Không có dữ liệu'})
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
+
 @csrf_exempt
 def api_insertData(request):
     if request.method == "POST":
-        id = int(request.POST.get('id'))
+        token = request.POST.get('token')
+        if utils.isAdminFromToken(token) == False:
+            data = json.dumps({'code': 0, 'status': 'Tên đăng nhập hoặc mật khẩu sai hoặc không có quyền'})
+            return HttpResponse(data,content_type="application/json")
+        # id = int(request.POST.get('id'))
         ten = request.POST.get('ten')
         gia = request.POST.get('gia')
-        result = utils.insert(id, ten, gia)
+        result = utils.insert(ten, gia)
         if result==False:
             return HttpResponse({'Thêm dữ liệu không thành công'})
-        data = json.dumps({'id':id,'ten':ten,'gia':gia})
+        data = json.dumps({'ten':ten,'gia':gia})
         return HttpResponse(data,content_type="application/json")
-    return HttpResponse({'Không có dữ liệu'})
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
+
 @csrf_exempt
 def api_findData(request):
     key = ""
@@ -220,4 +174,21 @@ def api_findData(request):
             data_re.append(element)
         data_re = json.dumps(data_re)       # chuyển dữ liệu về dạng json
         return HttpResponse(data_re,content_type="application/json")
-    return HttpResponse({'Không có dữ liệu'})
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
+
+@csrf_exempt
+def api_findDataMa(request):
+    if request.method == "POST":
+        ma_dd = request.POST.get('ma_dd')
+        id = utils.findMa(ma_dd)
+        if id == False:
+            data = json.dumps({'code': 0, 'status': 'Không có thông tin'})
+            return HttpResponse(data,content_type="application/json")
+        data = utils.find("id",str(id))
+        data_re = []
+        for i in data:
+            element = {"id": str(i.id), "ten": i.ten, "gia": i.gia}
+            data_re.append(element)
+        data_re = json.dumps(data_re)  # chuyển dữ liệu về dạng json
+        return HttpResponse(data_re, content_type="application/json")
+    return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")

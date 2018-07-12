@@ -1,18 +1,4 @@
-/** {*/
-  /*margin: 0;*/
-  /*padding: 0;*/
-/*}*/
 
-/*@font-face {*/
-  /*font-family: 'form';*/
-  /*src: url("fonts/form.eot");*/
-/*}*/
-/*@font-face {*/
-  /*font-family: 'form';*/
-  /*src: url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg6vDWgAAAC8AAAAYGNtYXAAbgBfAAABHAAAADxnYXNwAAAAEAAAAVgAAAAIZ2x5ZuVMt8gAAAFgAAAApGhlYWQAJ3CxAAACBAAAADZoaGVhB5kD7QAAAjwAAAAkaG10eAYAACkAAAJgAAAADGxvY2EACgBSAAACbAAAAAhtYXhwAAcANAAAAnQAAAAgbmFtZXPEmewAAAKUAAABHnBvc3QAAwAAAAADtAAAACAAAwQAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACAAPgPA/8D/wAPAAEAAAAAAAAAAAAAAAAAAAAAgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEACgAAAAGAAQAAQACACAAPv//AAAAIAA+////4f/EAAEAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAMAKf/2A9cDpAAUACkAMQAAExQeAjMyPgI1NC4CIyIOAhUhFA4CIyIuAjU0PgIzMh4CFSUVMxU3JxUjKUqArGJirIBKSoCsYmKsgEoDSDpkhkxMhmQ6OmSGTEyGZDr9ytHDw9EBzWKsgEpKgKxiYqyASkqArGJMhmQ6OmSGTEyGZDo6ZIZMXLhzz89zAAAAAAEAAAABAABSMHaPXw889QALBAAAAAAAzpiWDQAAAADOmJYNAAD/9gPXA6QAAAAIAAIAAAAAAAAAAQAAA8D/wAAABAAAAAApA9cAAQAAAAAAAAAAAAAAAAAAAAMAAAAAAgAAAAQAACkAAAAAAAoAUgABAAAAAwAyAAMAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEACAAAAAEAAAAAAAIADgAyAAEAAAAAAAMACAAeAAEAAAAAAAQACABAAAEAAAAAAAUAFgAIAAEAAAAAAAYABAAmAAEAAAAAAAoAKABIAAMAAQQJAAEACAAAAAMAAQQJAAIADgAyAAMAAQQJAAMACAAeAAMAAQQJAAQACABAAAMAAQQJAAUAFgAIAAMAAQQJAAYACAAqAAMAAQQJAAoAKABIAGYAbwByAG0AVgBlAHIAcwBpAG8AbgAgADAALgAwAGYAbwByAG1mb3JtAGYAbwByAG0AUgBlAGcAdQBsAGEAcgBmAG8AcgBtAEcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=) format("truetype"), url(data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAAAQgAAsAAAAAA9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgDq8NaGNtYXAAAAFoAAAAPAAAADwAbgBfZ2FzcAAAAaQAAAAIAAAACAAAABBnbHlmAAABrAAAAKQAAACk5Uy3yGhlYWQAAAJQAAAANgAAADYAJ3CxaGhlYQAAAogAAAAkAAAAJAeZA+1obXR4AAACrAAAAAwAAAAMBgAAKWxvY2EAAAK4AAAACAAAAAgACgBSbWF4cAAAAsAAAAAgAAAAIAAHADRuYW1lAAAC4AAAAR4AAAEec8SZ7HBvc3QAAAQAAAAAIAAAACAAAwAAAAMEAAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAgAD4DwP/A/8ADwABAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAAoAAAABgAEAAEAAgAgAD7//wAAACAAPv///+H/xAABAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAADACn/9gPXA6QAFAApADEAABMUHgIzMj4CNTQuAiMiDgIVIRQOAiMiLgI1ND4CMzIeAhUlFTMVNycVIylKgKxiYqyASkqArGJirIBKA0g6ZIZMTIZkOjpkhkxMhmQ6/crRw8PRAc1irIBKSoCsYmKsgEpKgKxiTIZkOjpkhkxMhmQ6OmSGTFy4c8/PcwAAAAABAAAAAQAAUjB2j18PPPUACwQAAAAAAM6Ylg0AAAAAzpiWDQAA//YD1wOkAAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAKQPXAAEAAAAAAAAAAAAAAAAAAAADAAAAAAIAAAAEAAApAAAAAAAKAFIAAQAAAAMAMgADAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAgAAAABAAAAAAACAA4AMgABAAAAAAADAAgAHgABAAAAAAAEAAgAQAABAAAAAAAFABYACAABAAAAAAAGAAQAJgABAAAAAAAKACgASAADAAEECQABAAgAAAADAAEECQACAA4AMgADAAEECQADAAgAHgADAAEECQAEAAgAQAADAAEECQAFABYACAADAAEECQAGAAgAKgADAAEECQAKACgASABmAG8AcgBtAFYAZQByAHMAaQBvAG4AIAAwAC4AMABmAG8AcgBtZm9ybQBmAG8AcgBtAFIAZQBnAHUAbABhAHIAZgBvAHIAbQBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) format("woff");*/
-  /*font-weight: normal;*/
-  /*font-style: normal;*/
-/*}*/
 [class*="icon-"] {
   font-family: 'form';
   speak: none;
@@ -28,32 +14,6 @@
 .icon-arrow-right:before {
   content: "\3e";
 }
-
-/*body, input {*/
-  /*font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;*/
-/*}*/
-
-/*body {*/
-  /*line-height: 1.6;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*background: #fff;*/
-  /*color: #111;*/
-/*}*/
-
-/*a {*/
-  /*color: #e74c3c;*/
-  /*text-decoration: none;*/
-  /*-webkit-transition: color .2s;*/
-  /*-moz-transition: color .2s;*/
-  /*-o-transition: color .2s;*/
-  /*transition: color .2s;*/
-/*}*/
-
-/*a:hover {*/
-  /*text-decoration: underline;*/
-  /*color: #111;*/
-/*}*/
-
 form {
   margin: 4% auto;
   width: 19em;
@@ -98,10 +58,10 @@ form {
   }
 }
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.73) inset;
 }
 
-input {
+input{
   color: #444;
   font-size: 1.5em;
   outline: none;
@@ -112,7 +72,7 @@ input {
   border-left: solid 1px;
   border-right: solid 1px;
   border-bottom: solid 1px;
-  border-color: #bbb;
+  border-color: #000000;
   background: transparent;
   display: block;
   height: 2em;
@@ -126,16 +86,36 @@ input {
   -o-transition: border .25s;
   transition: border .25s;
 }
-
+select{
+  font-size: 1.5em;
+  border-top: none;
+  border-left: solid 1px;
+  border-right: solid 1px;
+  border-bottom: solid 1px;
+  border-color: #000000;
+  background: transparent;
+  display: block;
+  height: 2em;
+  width: 13em;
+  margin-bottom: 5%;
+  padding: 0 3%;
+  position: relative;
+  z-index: 0;
+  -webkit-transition: border .25s;
+  -moz-transition: border .25s;
+  -o-transition: border .25s;
+  transition: border .25s;
+}
 input:focus {
   color: #111;
   border-color: #444;
+  background: transparent;
 }
 
 
 
 .placeholder {
-  color: #999;
+  color: #404040;
   -webkit-transition: color .2s;
   -moz-transition: color .2s;
   -o-transition: color .2s;
@@ -143,7 +123,7 @@ input:focus {
 }
 
 ::-webkit-input-placeholder {
-  color: #999;
+  color: #404040;
   -webkit-transition: color .2s;
   -moz-transition: color .2s;
   -o-transition: color .2s;
@@ -151,7 +131,7 @@ input:focus {
 }
 
 :-moz-placeholder {
-  color: #999;
+  color: #404040;
   -webkit-transition: color .2s;
   -moz-transition: color .2s;
   -o-transition: color .2s;
@@ -159,7 +139,7 @@ input:focus {
 }
 
 :-ms-input-placeholder {
-  color: #999;
+  color: #404040;
   -webkit-transition: color .2s;
   -moz-transition: color .2s;
   -o-transition: color .2s;
@@ -167,19 +147,19 @@ input:focus {
 }
 
 .placeholder:focus {
-  color: #ddd;
+  color: #333333;
 }
 
 input:focus::-webkit-input-placeholder {
-  color: #ddd;
+  color: #c2c2c2;
 }
 
 input:focus::-moz-input-placeholder {
-  color: #ddd;
+  color: #c2c2c2;
 }
 
 input:focus::-ms-input-placeholder {
-  color: #ddd;
+  color: #c2c2c2;
 }
 
 .error {
@@ -257,7 +237,7 @@ button {
   -webkit-appearance: none;
   border: none;
   background: transparent;
-  color: #bbb;
+  color: #646566;
   font-size: 2.05em;
   padding: 3% 7%;
   cursor: pointer;

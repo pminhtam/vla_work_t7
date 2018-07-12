@@ -23,14 +23,12 @@
 
 {%block content%}
 
-    <form action="/app/find" method="post">
+    <form action="/app/findma" method="post">
         {%csrf_token%}
-        <h1>Tìm kiếm sản phẩm</h1><br/>
+        <h1>Tìm kiếm sản phẩm theo mã</h1><br/>
 
         <span class="input"></span>
-        <input type="text" name="label" value="id" placeholder="Label" autofocus autocomplete="off" required/>
-        <span class="input"></span>
-        <input type="text" name="key" placeholder="Key" required pattern="[0-9]+"/>
+        <input type="text" name="ma_dd" placeholder="Mã định danh" required pattern="[0-9]+"/>
         <button type="submit"  title="Submit form" class="icon-arrow-right"><span>Tìm kiếm</span></button>
     </form>
 

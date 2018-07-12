@@ -1,16 +1,22 @@
 {% extends  "pages/base.html"%}
+
+
 {%block head%}
-
-    	{%load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
-
+    {%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
 {% endblock %}
+
+
+{%block logout%}
+{% endblock %}
+
+
 {%block content%}
-    <center>
+    <div>
         <form action="/register" method="POST">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Đăng ký">
         </form>
-    </center>
+    </div>
 {% endblock %}

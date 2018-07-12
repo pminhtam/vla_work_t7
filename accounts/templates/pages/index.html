@@ -1,19 +1,26 @@
 {% extends  "pages/base.html"%}
+
+
+{%block head%}
+    {%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+
+{%block user%}
+{% endblock %}
+
+
+
 {%block content%}
+    <div>
+        <p>Xin chao {{user.username}}</p>
+        <p>Xin chao {{user.email}}</p>
+        <p>Tên {{user.ten}}</p>
+        <p>Dia chi {{user.diachi}}</p>
+        <p>Số điện thoại {{user.SDT}}</p>
+        <p>Giới tính {{user.gioitinh}}</p>
+        <p>Chức vụ {{user.chucvu}}</p>
 
-
-<!--{% if user.username %}-->
-    <p>Xin chao {{user.username}}</p>
-    <p>Xin chao {{user.email}}</p>
-    <p>Xin chao {{user.password}}</p>
-    <p>Thuộc tính {{user.ten}}</p>
-    <p>Thuộc tính {{user.diachi}}</p>
-    <p>session{{sessionid}}</p>
-
-    <!--<p><a href="{% url 'logout'%}">Đăng xuất</a></p>-->
-<!--{% else %}-->
-    <!--<p><a href="{% url 'login'%}">Đăng nhập</a></p>-->
-<!--{% endif %}-->
-
-
+    </div>
 {% endblock %}

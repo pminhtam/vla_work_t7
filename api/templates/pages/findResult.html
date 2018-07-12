@@ -1,93 +1,67 @@
 {% extends  "pages/base.html"%}
+
+
 {%block head%}
 
 	{%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+
 	<title>Result</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico'%}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css'%}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css'%}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css'%}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
-<!--===============================================================================================-->
+
 {% endblock %}
 
+{%block user%}
+	{% if user.is_anonymous%}
+		<li><a href="/login">Đăng nhập</a></li>
+		<li><a href="/register">Đăng Ký</a></li>
+	{% else %}
+
+	{% endif %}
+{%   endblock %}
+
+{%block logout%}
+	{% if user.is_anonymous %}
+
+	{% else %}
+		<li><a href="/logout">Đăng xuất</a></li>
+	{% endif %}
+{%   endblock %}
+
 {%block content%}
-	<div class="limiter">
-		<div class="container-table100">
-
-
-			<div class="wrap-table100">
-				<div><h4>Thời gian tìm kiếm : {{time}}s   </h4></div>
-				<div><h4>  {{status}}</h4></div>
-				<div><h4>Tổng số sản phẩm  {{count}}</h4></div>
-				<div class="table100 ver1 m-b-110">
-					<div class="table100-head">
-						<table>
-							<thead>
-								<tr class="row100 head">
-									<th class="cell100 column1">ID</th>
-									<th class="cell100 column3">Tên sản phẩm</th>
-									<th class="cell100 column4">Giá</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-
-					<div class="table100-body js-pscroll">
-						<table>
-							<tbody>
-							    {% for i in data  %}
-								<tr class="row100 body">
-									<td class="cell100 column1">{{i.id}}</td>
-									<td class="cell100 column3">{{i.ten}}</td>
-									<td class="cell100 column4">{{i.gia}}</td>
-
-								</tr>
-    							{% endfor %}
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<a href="find">Tìm sản phẩm khác</a>
-
-			</div>
+	<div >
+	<section>
+  	<!--for demo wrap-->
+		<h1>Kết quả tìm kiếm</h1>
+		<div class="tbl-header">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Tên</th>
+						<th>Giá</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
+		<div class="tbl-content">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tbody>
+					{% for i in data  %}
+					<tr>
+						<th>{{i.id}}</th>
+						<th>{{i.ten}}</th>
+						<th>{{i.gia}}</th>
+
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</section>
+		<a href="find">Tìm sản phẩm khác</a>
+
 	</div>
-
-
-<!--===============================================================================================-->	
-	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'vendor/bootstrap/js/popper.js'%}"></script>
-	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'vendor/select2/select2.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js'%}"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			var ps = new PerfectScrollbar(this);
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-			
-		
-	</script>
-<!--===============================================================================================-->
-	<script src="{% static 'js/main.js'%}"></script>
 
 {% endblock %}
