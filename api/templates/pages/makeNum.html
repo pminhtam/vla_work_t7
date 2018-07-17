@@ -21,9 +21,25 @@
         </select>
 
         <span class="input"></span>
-        <input type="text" name="a" placeholder="a" value="21" autofocus autocomplete="off" required pattern="[0-9]+"/>
+        <input type="hidden" name="a" placeholder="a" value="21" autofocus autocomplete="off" required pattern="[0-9]+"/>
         <span class="input"></span>
-        <input type="text" name="m" placeholder="m" required pattern="[0-9]+" />
-        <button type="submit"  title="Submit form" class="icon-arrow-right"><span>Sinh mã</span></button>
+{#        <input type="text" name="m" placeholder="m" required pattern="[0-9]+" />#}
+          <select name="m">
+                <option value="1000">100</option>
+                <option value="1000">200</option>
+                <option value="1000">500</option>
+                <option value="1000">1000</option>
+                <option value="1000">2000</option>
+                <option value="1000">5000</option>
+                <option value="1000">10000</option>
+                <option value="1000">20000</option>
+                <option value="1000">50000</option>
+                <option value="1000">100000</option>
+                <option value="1000">200000</option>
+                <option value="1000">500000</option>
+        </select>
+{#        <button type="submit"  value="Tạo số" title="Submit form"><span>Sinh mã</span></button>#}
+            <input type="submit" value="Tạo số">
+
     </form>
 {% endblock %}

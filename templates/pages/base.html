@@ -16,17 +16,21 @@
             /*width: 100%;*/
         /*}*/
         body{
-          background: -webkit-linear-gradient(left, #c2f0ee, #edfaff);
-          background: linear-gradient(to right, #c2f0ee, #edfaff);
+          {#background: -webkit-linear-gradient(left, #15FFCC, #71F06D);#}
+          {#background: linear-gradient(to right, #15FFCC, #71F06D);#}
+            background: #fff;
           font-family: 'Roboto', sans-serif;
         }
         #menu ul {
-          background: #25b7c4;
+          {#background: #1799E8;#}
+          background: linear-gradient(to right, #AF4E4E, #FF1515);
+
           list-style-type: none;
           text-align: center;
+            {#text-decoration-color: #FF0000;#}
         }
         #menu li {
-          color: #f1f1f1;
+          color: #FF0000;
           display: inline-block;
           width: 120px;
           height: 40px;
@@ -37,10 +41,11 @@
           text-decoration: none;
           color: #fff;
           display: block;
+            font-size: 18px;
         }
         #menu a:hover {
-          background: #F1F1F1;
-          color: #333;
+          background: #AF2E00;
+          color: #fff;
         }
     </style>
         {%block head%}{% endblock %}

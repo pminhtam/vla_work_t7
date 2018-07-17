@@ -13,10 +13,11 @@ def makeNum(request):
         a = int(request.POST.get('a'))
         num_sum =utils.getCreatedNum()
         li = utils.lcg(a, m, num_sum)
+        print(li[0:2])
         result = utils.insertDataDinhDanh(id_sp,li,m,num_sum)
-
+        print(result)
         if result == False:
-            return render(request, 'pages/error.html', {'data': 'Thêm không thành công'})
+            return render(request, 'pages/error.html', {'data': 'Thêm không thành công','num':li})
         return render(request,'pages/makeNumResult.html',{"data":li})
     data_ds = utils.getDataDanhSach()
     return render(request,'pages/makeNum.html',{'data':data_ds})
@@ -93,13 +94,16 @@ def api_register(request):             # đăng nhập nếu thành công trả 
                 return HttpResponse(data,content_type="application/json")
     return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
 
-
+from accounts.models import User
 @csrf_exempt
 def api_verifyToken(request):
     if request.method == "POST":
         token = request.POST.get('token')
         if utils.verifyToken(token):
-            data = json.dumps({'code': 1, 'status': 'Đăng nhập thành công'})
+            username, password, time = utils.getUsernameFromToken(token)
+            user = User.objects.get(username=username)
+            data = json.dumps({'code': 1, 'status': 'Đăng nhập thành công','username':username,'ten':user.ten,
+                               'diachi':user.diachi,'SDT':user.SDT,'gioitinh':user.gioitinh,'chucvu':user.chucvu})
             return HttpResponse(data,content_type="application/json")
     return HttpResponse(json.dumps({'code': 0, 'status': 'Không có dữ liệu'}),content_type="application/json")
 
@@ -163,14 +167,15 @@ def api_findData(request):
     if request.method == "POST":
         label = request.POST.get('label')
         key = request.POST.get('key')
-        print(label)
-        print(key)
+        # print(label)
+        # print(key)
     if key != "" and key!=None:
         data = utils.find(label, key)  # trả lại dưới dạng đổi tượng sql
         # cần chuyển về dạng danh sách
         data_re = []
         for i in data:
-            element = {"id":str(i.id),"ten":i.ten,"gia":i.gia}
+            # print(i)
+            element = {"id":str(i.id),"ten":i.ten,"gia":int(i.gia)}
             data_re.append(element)
         data_re = json.dumps(data_re)       # chuyển dữ liệu về dạng json
         return HttpResponse(data_re,content_type="application/json")
@@ -187,7 +192,7 @@ def api_findDataMa(request):
         data = utils.find("id",str(id))
         data_re = []
         for i in data:
-            element = {"id": str(i.id), "ten": i.ten, "gia": i.gia}
+            element = {"id": str(i.id), "ten": i.ten, "gia": int(i.gia)}
             data_re.append(element)
         data_re = json.dumps(data_re)  # chuyển dữ liệu về dạng json
         return HttpResponse(data_re, content_type="application/json")

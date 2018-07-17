@@ -5,7 +5,7 @@ import pyodbc
 # import csv
 def lcg(a,m,bias):      # thuật toán tạo số ngẫu nhiên
     x = int(datetime.now().timestamp())%20
-    c_li = [1, 3,5]
+    c_li = [1,11,13,17]
 
     c = random.choice(c_li)
     li = []
@@ -174,6 +174,7 @@ def insertDataDinhDanh(id_sp,li,m,num_sum):
         try:
             cursor.execute(query)
         except Exception:
+            # print("insertDataDinhDanh :  insert dindanh ko đc")
             return False
     time = datetime.now().strftime("%Y/%m/%d %H:%M")
     num_sum = num_sum+m
@@ -181,8 +182,8 @@ def insertDataDinhDanh(id_sp,li,m,num_sum):
     try:
         cursor.execute(query)
     except Exception:
+        # print("insertDataDinhDanh :  insert lichsu ko đc")
         return False
-
     con.commit()
     return True
 
