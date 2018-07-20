@@ -174,6 +174,8 @@ def getCreatedNum():            # xác đinh số mã đã sinh
         data.append(int(row.num_sum))
     return data[0]
 def insertDataDinhDanh(id_sp,code_list,m,num_sum):
+    ###     id_sp mã id của sản phẩm
+    ###     code_list  danh sách mã vừa sinh
     ###     m  số lượng vừa sinh
     ###     createdNumber : số lượng đã sinh
     for i in code_list:
@@ -196,6 +198,19 @@ def insertDataDinhDanh(id_sp,code_list,m,num_sum):
 
 def getDataDanhSach():              # lấy thông tin về các sản phẩm đang tồn tại
     query = "select * from danhsach"
+    try:
+        cursor.execute(query)
+    except Exception:
+        return False
+    data = []
+    for row in cursor.fetchall():
+        data.append(row)
+    return data
+
+##############################
+##
+def listMa(begin, end):
+    query = "select * from dinhdanh where id>="+begin+"and id<="+end + "order by id"
     try:
         cursor.execute(query)
     except Exception:

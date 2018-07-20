@@ -1,0 +1,66 @@
+{% extends  "pages/base.html"%}
+{%block head%}
+    {%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+{% endblock %}
+{%block user%}
+    {% if user.is_anonymous%}
+        <li><a href="/login">Đăng nhập</a></li>
+        <li><a href="/register">Đăng Ký</a></li>
+    {% else %}
+
+    {% endif %}
+{%   endblock %}
+
+{%block logout%}
+    {% if user.is_anonymous %}
+    {% else %}
+        <li><a href="/edit">Sửa thông tin</a></li>
+        <li><a href="/logout">Đăng xuất</a></li>
+    {% endif %}
+{%   endblock %}
+
+
+{%block content%}
+    <div>
+        <h1>Liệt kê danh sách mã</h1><br/>
+        <form action="/app/listma" method="post">
+            {%csrf_token%}
+
+            <span class="input"></span>
+            <input type="text" name="begin" placeholder="Bắt đầu" required pattern="[0-9]+"/>
+            <span class="input"></span>
+            <input type="text" name="end" placeholder="Kết thúc" required pattern="[0-9]+"/>
+            <button type="submit"  title="Submit form" class="icon-arrow-right"><span>Tìm kiếm</span></button>
+        </form>
+        <section>
+        <!--for demo wrap-->
+            <h1>Kết quả </h1>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>id sản phẩm</th>
+                            <th>Mã</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        {% for i in data  %}
+                        <tr>
+                            <th>{{i.id}}</th>
+                            <th>{{i.id_sp}}</th>
+                            <th>{{i.ma_dd}}</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+{% endblock %}

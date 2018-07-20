@@ -32,6 +32,13 @@ def makeNum(request):
     if data_ds == False:
         return render(request, 'pages/error.html', {'data': 'Không có dữ liệu'})
     return render(request,'pages/makeNum.html',{'data':data_ds})
+def listMa(request):
+    data = []
+    if request.method == "POST":
+        begin = request.POST.get('begin')
+        end = request.POST.get('end')
+        data = utils.listMa(begin,end)
+    return render(request,'pages/listMa.html',{'data':data})
 
 def insertData(request):
     if request.user.is_staff==False:

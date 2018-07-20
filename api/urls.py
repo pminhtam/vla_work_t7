@@ -8,6 +8,7 @@ urlpatterns = [
     path('insert',views.insertData),
     path('find',views.findData),
     path('findma', views.findDataMa),
+    path('listma', views.listMa),
     path('api/make', views.api_makeNum),
     path('api/insert', views.api_insertData),
     path('api/find', views.api_findData),
