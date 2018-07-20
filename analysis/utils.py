@@ -36,7 +36,7 @@ def getDataDanhSach():              # lấy thông tin về các sản phẩm đ
     for row in cursor.fetchall():
         data.append(row)
     return data
-# from ..api.utils import getDataDanhSach
+# from ..app.utils import getDataDanhSach
 # data = getDataDanhSach()
 
 # for i in data:
