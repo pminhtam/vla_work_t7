@@ -13,7 +13,8 @@
     {%block logout%}
       {% if user.is_anonymous %}
       {% else %}
-        <li><a href="/logout">Đăng xuất</a></li>
+          <li><a href="/edit">Sửa thông tin</a></li>
+          <li><a href="/logout">Đăng xuất</a></li>
       {% endif %}
     {%   endblock %}
 
@@ -28,7 +29,7 @@
 <div><h2 style="color: #c9302c">
     {{data}}</h2>
     <br>
-    {{ num }}
+    {{ code }}
 </div>
 
 {% endblock %}

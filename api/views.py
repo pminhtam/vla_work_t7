@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from . import utils
 import os.path
 # Create your views here.
-
+from .makeCode import makeCode
 def makeNum(request):
     if request.user.is_staff==False:
         return render(request,'pages/error.html',{'data':'Bạn phải đăng nhập Hoặc bạn không có quyền sinh số'})
@@ -13,13 +13,24 @@ def makeNum(request):
         a = int(request.POST.get('a'))
         num_sum =utils.getCreatedNum()
         li = utils.lcg(a, m, num_sum)
-        print(li[0:2])
-        result = utils.insertDataDinhDanh(id_sp,li,m,num_sum)
+        result_code_dict = makeCode(li,id_sp)
+        # print(li[0:2])
+        checksum_list = result_code_dict['checksum_list']
+        code_list = result_code_dict['code_list']
+        year = result_code_dict['year']
+        group2_list = result_code_dict['group2_list']
+        group3 = result_code_dict['group3']
+        list_zip = zip(group2_list,checksum_list,code_list)
+        result = utils.insertDataDinhDanh(id_sp,code_list,m,num_sum)
         print(result)
         if result == False:
-            return render(request, 'pages/error.html', {'data': 'Thêm không thành công','num':li})
-        return render(request,'pages/makeNumResult.html',{"data":li})
+            return render(request, 'pages/error.html', {'data': 'Thêm không thành công','code':li})
+        return render(request,'pages/makeNumResult.html',{'list_zip':list_zip,
+                                                         'year':year,'group3':group3,
+                                                          'range':range(10)})
     data_ds = utils.getDataDanhSach()
+    if data_ds == False:
+        return render(request, 'pages/error.html', {'data': 'Không có dữ liệu'})
     return render(request,'pages/makeNum.html',{'data':data_ds})
 
 def insertData(request):

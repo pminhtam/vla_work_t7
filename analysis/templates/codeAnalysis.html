@@ -1,0 +1,79 @@
+{% extends  "pages/base.html"%}
+
+
+{%block head%}
+
+	{%load staticfiles %}
+    <script src="{% static 'javascript/Chart.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+	<title>Result</title>
+	<meta charset="UTF-8">
+
+{% endblock %}
+{%block user%}
+    {% if user.is_anonymous%}
+        <li><a href="/login">Đăng nhập</a></li>
+        <li><a href="/register">Đăng Ký</a></li>
+    {% else %}
+
+    {% endif %}
+{%   endblock %}
+
+{%block logout%}
+    {% if user.is_anonymous %}
+    {% else %}
+        <li><a href="/edit">Sửa thông tin</a></li>
+        <li><a href="/logout">Đăng xuất</a></li>
+    {% endif %}
+{%   endblock %}
+
+{%block content%}
+    <div style="height: 600px;width: 1000px">
+    <h1>{{ title }}</h1>
+        <canvas id="myChart"></canvas>
+    </div>
+<script type="text/javascript">
+	var ctx = document.getElementById("myChart");
+    var count = {{ num }};
+    var ten = [];
+    {% for i in ten %}
+        console.log("{{ i }}");
+        ten.push("{{ i }}")
+    {% endfor %}
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            {#labels: ["Điều hòa","Máy tính","Chuột","Bàn phím","Toán","Hóa"],#}
+            labels : ten,
+            datasets: [{
+                label: '# code',
+                data: count ,
+                backgroundColor: [
+                    {% for i in ten %}
+                        'rgba(255, 199, 132, 0.2)',
+                    {% endfor %}
+                    {#'rgba(255, 99, 132, 0.2)'#}
+                ],
+                borderColor: [
+                    {% for i in ten %}
+                        'rgba(255,99,132,1)',
+                    {% endfor %}
+                    {#'rgba(255,99,132,1)'#}
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endblock %}

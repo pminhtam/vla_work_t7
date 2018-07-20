@@ -5,8 +5,7 @@
 
 	{%load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
-
+        <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
 	<title>Result</title>
 	<meta charset="UTF-8">
 
@@ -25,6 +24,7 @@
 	{% if user.is_anonymous %}
 
 	{% else %}
+        <li><a href="/edit">Sửa thông tin</a></li>
 		<li><a href="/logout">Đăng xuất</a></li>
 	{% endif %}
 {%   endblock %}

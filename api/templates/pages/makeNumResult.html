@@ -3,20 +3,59 @@
 {%block head%}
     {%load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+
 {% endblock %}
 
 {%block user%}
 {% endblock %}
 
 {%block content%}
-    <div>
-        <a href="/app/make">Tiếp tục sinh mã</a>
-        <br>
-        Danh sách số đã sinh
-        <br>
+{#    <div>#}
+{#        <a href="/app/make">Tiếp tục sinh mã</a>#}
+{#        <br>#}
+{#        Danh sách số đã sinh#}
+{#        <br>#}
 {#        {% for i in 10  %}#}
-            {{data}}
+{#            {{code_list.i}}#}
 {#        <br>#}
 {#        {% endfor %}#}
-    </div>
+{#    </div>#}
+    <div >
+        <a href="/app/make">Tiếp tục sinh mã</a>
+        <section>
+        <!--for demo wrap-->
+            <h1>Kết quả tìm kiếm</h1>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th>year</th>
+                            <th>Mã ngẫu nhiên</th>
+                            <th>Mã id sp</th>
+                            <th>checksum</th>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        {% for i in list_zip  %}
+                        <tr>
+                            <th>{{year}}</th>
+                            <th>{{i.0}}</th>
+                            <th>{{group3}}</th>
+                            <th>{{i.1}}</th>
+                            <th>{{i.2}}</th>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+	</div>
 {% endblock %}

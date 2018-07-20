@@ -5,13 +5,18 @@ import pyodbc
 # import csv
 def lcg(a,m,bias):      # thuật toán tạo số ngẫu nhiên
     x = int(datetime.now().timestamp())%20
-    c_li = [1,11,13,17]
+    # x = 2
+    c_li = [1,11,13,17,19]
 
     c = random.choice(c_li)
     li = []
+    print(m)
+    print(bias)
     for i in range(m):
         b = a*x+c
         (_ , x) = divmod(b,m)
+        # x = b%m
+        # print(x)
         li.append(x+bias)
     return li
 def writeData(list,filename):
@@ -22,17 +27,16 @@ def writeData(list,filename):
 con = pyodbc.connect('Trusted_Connection=yes', driver = '{SQL Server}',server = 'DESKTOP-6O0KO5B\SQLEXPRESS', database ='sanpham')
 cursor = con.cursor()
 
-def insert(ten,gia):
+def insert(ten,gia):        # thêm sản phẩm
     # query = "insert into danhsach values ('" + str(id) + "',N'" + ten + "','" + gia + "')"
     query = "insert into danhsach values (N'" + ten + "','" + gia + "')"
-
     try:
         cursor.execute(query)
     except Exception:
         return False
     con.commit()
     return True
-def find(label,key):
+def find(label,key):           # tìm kiếm theo mã sản phẩm
     query = "select * from danhsach where "+label+"=N'" + key + "'"
     try:
         cursor.execute(query)
@@ -42,7 +46,7 @@ def find(label,key):
     for row in cursor.fetchall():
         data.append(row)
     return data
-def findMa(ma_dd):
+def findMa(ma_dd):              # tìm kiếm theo mã đinh danh
     query = "select * from dinhdanh where ma_dd='" + ma_dd + "'"
     try:
         cursor.execute(query)
@@ -55,10 +59,11 @@ def findMa(ma_dd):
         return data[0]
     return False
 ########################
-# Tạo token
+# Token
+########################
 import jwt
 from accounts.models import User
-def createToken(username,password):
+def createToken(username,password):             # mã hóa thông tin thành token
     data = {
         'username': username,
         'password': password,
@@ -67,7 +72,7 @@ def createToken(username,password):
     # jwt = PyJWT()
     token = jwt.encode(data, "SECRET_KEY")
     return token
-def getUsernameFromToken(token):
+def getUsernameFromToken(token):                # giải mã token nhận được
     try:
         data = jwt.decode(token,"SECRET_KEY")
     except Exception:
@@ -76,12 +81,12 @@ def getUsernameFromToken(token):
     password = data['password']
     time = data['timestamp']
     return  username,password,time
-def checkUser(username,password):
+def checkUser(username,password):               # kiểm tra tài khoản và mật khẩu có khớp không
     user = User.objects.get(username=username)
     if user:
         return user.check_password(password)
     return False
-def verifyToken(token):                         # kiểm ta tài khoản mật khẩu
+def verifyToken(token):                         # kiểm ta tài khoản mật khẩu thông qua token
     username,password,time = getUsernameFromToken(token)
     if username == None:
         return False
@@ -97,9 +102,11 @@ def isAdminFromToken(token):                        # kiểm tra xem có phải 
         return False
     if checkUser(username,password):
         return User.objects.get(username=username).is_staff
+######################################################
+
 #tạo form đăng ký qua api
 import re
-class RegisterAPI:
+class RegisterAPI:              # đăng ký thông qua API
     def __init__(self,username,email,pass1,pass2):
         self.username = username
         self.email = email
@@ -124,7 +131,7 @@ class RegisterAPI:
             return True
         return False
 
-class EditAPI:
+class EditAPI:          # chỉnh sửa thông tin
     def __init__(self,username,ten,diachi,SDT,gioitinh,chucvu):
         self.username = username
         self.ten = ten
@@ -154,7 +161,7 @@ class EditAPI:
 
 ####################
 ### Xác định mã định danh
-def getCreatedNum():
+def getCreatedNum():            # xác đinh số mã đã sinh
     query = "select max(num_sum) as num_sum from lichsu"
     try:
         cursor.execute(query)
@@ -166,10 +173,10 @@ def getCreatedNum():
             return 0
         data.append(int(row.num_sum))
     return data[0]
-def insertDataDinhDanh(id_sp,li,m,num_sum):
+def insertDataDinhDanh(id_sp,code_list,m,num_sum):
     ###     m  số lượng vừa sinh
     ###     createdNumber : số lượng đã sinh
-    for i in li:
+    for i in code_list:
         query = "insert into dinhdanh values ('" + str(id_sp) +"','" + str(i) + "')"
         try:
             cursor.execute(query)
@@ -187,7 +194,7 @@ def insertDataDinhDanh(id_sp,li,m,num_sum):
     con.commit()
     return True
 
-def getDataDanhSach():
+def getDataDanhSach():              # lấy thông tin về các sản phẩm đang tồn tại
     query = "select * from danhsach"
     try:
         cursor.execute(query)

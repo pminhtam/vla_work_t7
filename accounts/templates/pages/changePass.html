@@ -1,0 +1,29 @@
+{% extends  "pages/base.html"%}
+
+
+{%block head%}
+    {%load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{%block user %}
+{% endblock %}
+
+
+{%block content%}
+    <form action="/changepass" method="POST">
+        {% csrf_token %}
+        <h2 style="color: #c9302c">{{ error }}<br></h2>
+        <label>Mật khẩu cũ: </label>
+        <input type="password" name="passOld"/>
+        <label>Mật khẩu mới: </label>
+        <input type="password" name="passNew"/>
+        <label>Nhập lại mật khẩu mới: </label>
+        <input type="password" name="repass"/>
+
+        <input type="hidden" name="next" value="/">
+        <input type="hidden" name="username" value="{{user.username}}">
+        <!--{{form.as_p}}-->
+        <input type="submit" value="Chỉnh sửa">
+    </form>
+{% endblock %}
